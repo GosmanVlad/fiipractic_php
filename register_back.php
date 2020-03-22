@@ -15,6 +15,7 @@
                 $password = md5($_POST['password']);
                 $email = $_POST['email'];
 
+
                 $result = vQuery("INSERT INTO users (id, name, password, email) VALUES (NULL, '$username', '$password', '$email')");
                 
                 echo '<div class="alert alert-success" role="alert">
@@ -22,7 +23,7 @@
                   </div>';
                 header( "refresh:1;url=index.php" );
             }
-            
+
         ?>
     </div></div>
 
