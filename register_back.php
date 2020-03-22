@@ -22,6 +22,7 @@
                   </div>';
                 header( "refresh:1;url=index.php" );
             }
+            
         ?>
     </div></div>
 

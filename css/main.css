@@ -1,0 +1,114 @@
+body {
+    background-color: #155DA3;
+}
+.menu-container {
+    padding:1px;
+    margin-left: 100px;
+    margin-top: 20px;
+    margin-right: 100px;
+    border-radius:15px;
+    background-image:linear-gradient(to top, #151516, #464646);
+}
+.menu {
+    list-style: none;
+    padding:0;
+    padding-left:50px;
+}
+.menu-item {
+    display: inline-block;
+    margin-right:40px;
+    letter-spacing:1px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.menu-item a {
+    text-decoration:none;
+    color: white;
+    font-size:15px;
+}
+
+.menu-item a:hover {
+    color: #afafaf;
+}
+
+.body-container {
+    padding:1px;
+    margin-left: 100px;
+    margin-top: 20px;
+    margin-right: 100px;
+    background-image:linear-gradient(to top, #e4e4e4, #F1EFEF);
+    box-shadow: 0 10px 16px 0 rgba(0,0,0,0.2), 0 3px 10px 0 rgba(0,0,0,0.19);
+}
+
+.body-wall {
+    padding:20px;
+}
+
+.body-container h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align:center;
+}
+
+.box-container a {
+    text-decoration:none;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:15px;
+}
+p {
+    padding-left:50px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+}
+
+.box-container {
+    display:inline-block;
+    border: 1px solid #d4d0d0;
+    margin-left:25px;
+    margin-top:15px;
+    width:auto;
+    max-width:30%;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.box-container p {
+    padding-left:20px;
+    padding-right:20px;
+    max-width:300px;
+}
+
+.box-container img {
+    max-width:100%;
+    height:200px;
+}
+
+.testimonials {
+    display:inline-block;
+    width:auto;
+    border: 1px solid grey;
+    color:grey;
+    font-style:italic;
+    margin-left:10px;
+    padding:5px;
+    margin-bottom:20px;
+    border-radius:5px;
+}
+.testimonials p {
+    padding-left:10px;
+    padding-right:10px;
+}
+
+.footer {
+    padding:1px;
+    margin-left: 100px;
+    margin-top: 20px;
+    margin-right: 100px;
+    background-image:linear-gradient(to top, #e4e4e4, #F1EFEF);
+    box-shadow: 0 10px 16px 0 rgba(0,0,0,0.2), 0 3px 10px 0 rgba(0,0,0,0.19);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    padding:5px;
+    border-radius:1px;
+}
+
+
