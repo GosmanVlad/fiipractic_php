@@ -29,7 +29,7 @@
                 echo "<i class='fa fa-check'></i> $combustible<br>";
                 echo "<i class='fa fa-check'></i> <b>Capacitate motor:</b> $capacity<p>";
                 echo "<center><b style='color:green'>$price <i class='fa fa-euro'></i> / day</b></center>";
-                echo "<p><center><a href=''.URL.'cars.php?carid=".$row['id']."' class='btn btn-primary'>Afla mai multe detalii</a></center></p></div>";
+                echo "<p><center><a href='".URL."aboutcar.php?carid=".$row['id']."' class='btn btn-primary'>Afla mai multe detalii</a></center></p></div>";
            }
         }
         ?>

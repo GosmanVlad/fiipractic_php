@@ -82,6 +82,10 @@ p {
     height:200px;
 }
 
+.car-image {
+    max-width:100%;
+}
+
 .testimonials {
     display:inline-block;
     border: 1px solid grey;

@@ -27,13 +27,14 @@ $category->execute();
                     $transmission = $row['transmission'];
                     $capacity = $row['engine_capacity'];
                     $price = $row['price'];
+                    $car_id = $row['id'];
                     echo "<p><b>".$row["name"]." (Categorie: ".$row2['name'].")</b></p>";
                 }
                 echo "<p style='font-size:13px;'><i class='fa fa-check'></i> $transmission<br>";
                 echo "<i class='fa fa-check'></i> $combustible<br>";
                 echo "<i class='fa fa-check'></i> <b>Capacitate motor:</b> $capacity<p>";
                 echo "<center><b style='color:green'>$price <i class='fa fa-euro'></i> / day</b></center>";
-                echo "<p><center><a href=''.URL.'cars.php?carid=".$row['id']."' class='btn btn-primary'>Afla mai multe detalii</a></center></p></div>";
+                echo "<p><center><a href='".URL."aboutcar.php?carid=$car_id' class='btn btn-primary'>Afla mai multe detalii</a></center></p></div>";
            }
         }
     }
@@ -56,6 +57,7 @@ foreach($category as $row)
             $transmission = $row2['transmission'];
             $capacity = $row2['engine_capacity'];
             $price = $row2['price'];
+            $car_id = $row2['id'];
             echo "<div class='box-container'>";
                 echo "<img class='box-image' src ='".URL."images/".$row2["image"]."'></img><hr>";
                 if($result2->rowCount()) {
@@ -66,7 +68,7 @@ foreach($category as $row)
                 echo "<i class='fa fa-check'></i> $combustible<br>";
                 echo "<i class='fa fa-check'></i> <b>Capacitate motor:</b> $capacity<p>";
                 echo "<center><b style='color:green'>$price <i class='fa fa-euro'></i> / day</b></center>";
-                echo "<p><center><a href=''.URL.'cars.php' class='btn btn-primary'>Afla mai multe detalii</a></center></p></div>";
+                echo "<p><center><a href='".URL."aboutcar.php?carid=$car_id' class='btn btn-primary'>Afla mai multe detalii</a></center></p></div>";
         }
     }
 }
