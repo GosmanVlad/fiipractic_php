@@ -2,7 +2,7 @@
 
 <body>
     <?php Menu() ?>
-    <div class="body-container"> 
+    <div class="body-container"><div class="body-wall">
         <h1>Car Rental Romania - since 2005</h1>
         <br>
         <center><p style="font-size:17px;font-style:italic;"> Inca din anul 2005, Car Rental Romania, a oferit
@@ -12,7 +12,7 @@
         multor clienti.</p></center>
         <br><hr>
         <?php Testimonials(); ?>
-    </div>
+    </div></div>
 
     <?php Footer() ?>
     

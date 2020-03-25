@@ -3,6 +3,26 @@ session_start();
 define("URL", "http://localhost:8080/rental/");
 require("mysql.php");
 
+function category_Menu($page)
+{
+    echo '<center>';
+    if($page==0)
+        echo"<a href='".URL."cars.php' style='margin-left:5px;' class='btn btn-danger'>Toate masinile</a>";
+    else
+        echo"<a href='".URL."cars.php' style='margin-left:5px;' class='btn btn-primary'>Toate masinile</a>";
+    $category2 = vQuery_Select("SELECT * FROM cars_category");
+    $category2->execute();
+    foreach($category2 as $row)
+    {
+        $id = $row['id']; 
+        $name = $row['name'];
+        if($page == $id)
+            echo"<a href='".URL."cars.php?category=$id' style='margin-left:5px;'class='btn btn-danger'>$name</a>";
+        else
+            echo"<a href='".URL."cars.php?category=$id' style='margin-left:5px;' class='btn btn-primary'>$name</a>";
+    }
+    echo '</center><hr>';
+}
 function vQuery($query)
 {
     require("mysql.php");
@@ -24,7 +44,7 @@ function Menu()
     echo "<div class='menu-container'><ul class='menu'>";
     echo "<li class='menu-item'><a href='index.php'>Acasa</a></li>";
     echo "<li class='menu-item'><a href='about.php'>Despre noi</a></li>";
-    echo "<li class='menu-item'><a href='index.php'>Masini disponibile</a></li>";
+    echo "<li class='menu-item'><a href='cars.php'>Masini</a></li>";
     echo "<li class='menu-item'><a href='index.php'>Cere o oferta</a></li>";
     if(isset($_SESSION['auth']))
     {
@@ -42,13 +62,28 @@ function Footer()
         "<div class='footer'>
             Copyright @ 2020 - Car Rental
             <div style='float:right;margin-right:5px;'><a href='index.php'>Pagina principala</a></div>
-        </div>";
+        </div><br>";
 }
 
 function Testimonials()
 {
     echo '<h1>Testimoniale</h1>
-    <center><p style="font-size:17px;font-style:italic;">Iata cateva dintre parerile clientilor nostrii:</p></center>
-    <div class="testimonials"><h2 style="color:black;margin-left:5px;">Vlad:</h2><p>"Masini curate, foarte bine intretinute, o experienta foarte faina!"</p></div>
-    <div class="testimonials"><h2 style="color:black;margin-left:5px;">Andrei:</h2><p>"Servicii de calitate, masini curate, intretinute!"</p></div>';
+    <center><p style="font-size:17px;font-style:italic;">Iata cateva dintre parerile clientilor nostrii:</p></center>';
+
+    $result = vQuery_Select("SELECT * FROM testimonials ORDER BY id DESC LIMIT 3");
+    $result->execute();
+
+    echo '<div class="row">';
+    foreach($result as $row)
+    {
+        $name = $row['name'];
+        $feedback = $row['feedback'];
+        echo '<div class="col-sm">';
+        echo '<div class="testimonials">';
+        echo "<h3>$name</h3>";
+        echo "$feedback";
+        echo '</div>';
+        echo '</div>';
+    }
+    echo '</div>';
 }
