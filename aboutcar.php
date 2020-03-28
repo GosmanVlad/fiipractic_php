@@ -3,6 +3,19 @@ if(empty($_GET['carid']))
     header("Location: cars.php");
 else
     $carid = $_GET['carid'];
+/*******************************************************/
+$alreadyBooked = vQuery_Select("SELECT * FROM appointments WHERE carid = '$carid' ORDER BY id DESC");
+$alreadyBooked->execute();
+$rowCount = $alreadyBooked->rowCount();
+if($rowCount) {
+    $rowApp = $alreadyBooked->fetch();
+    $data_pred_hash = strtotime(str_replace("/","-", $rowApp['data_predare']));
+    $data_primire_hash = strtotime(str_replace("/","-", $rowApp['data']));
+    $data_pred = $rowApp['data_predare'];
+    $data_primire =$rowApp['data'];
+
+}
+/*******************************************************/
 ?>
 
 <body>
@@ -10,11 +23,11 @@ else
     <div class="body-container"><div class="body-wall"><br>
 
         <?php 
-            $result = vQuery_Select("SELECT * FROM cars WHERE id = '$carid'");
+            $result = vQuery_Select("SELECT *,ct.name as carName,  cat.name as categoryName FROM cars as ct JOIN cars_category as cat ON cat.id=ct.category WHERE ct.id = '$carid'");
             $result->execute();
             $row = $result->fetch();
             //------------------------------------------------------//
-            $name = $row['name'];
+            $name = $row['carName'];
             $category = $row['category'];
             $combustible = $row['combustible'];
             $seats = $row['seats'];
@@ -24,13 +37,8 @@ else
             $image = $row['image'];
             $transmission = $row['transmission'];
             $price = $row['price'];
-            $available = $row['available'];
             $power = $row['power'];
-            //------------------------------------------------------//
-            $result2 = vQuery_Select("SELECT name FROM cars_category WHERE id = '$category'");
-            $result2->execute();
-            $row2 = $result2->fetch();
-            $category_name = $row2['name'];
+            $category_name = $row['categoryName'];
             //------------------------------------------------------//
             if(isset($_POST['sendbtn']))
             {
@@ -39,15 +47,28 @@ else
                 else {
                     $nume = $_SESSION['name'];
                     $car = $_GET['carid'];
+                    $data_hash = strtotime(str_replace("/", "-", $_POST['data']));
                     $data = $_POST['data'];
                     $phone = $_POST['telefon'];
+                    $data_predare_hash = strtotime(str_replace("/", "-", $_POST['data-predare']));
                     $data_predare = $_POST['data-predare'];
                     $additions = $_POST['additions'];
                     $location = $_POST['locations'];
 
+                    if($rowCount) {
+                        if($data_hash <= $data_primire_hash && ($data_predare_hash >= $data_primire_hash && $data_predare_hash <= $data_pred_hash) ||
+                            $data_hash >= $data_primire_hash && $data_predare_hash <= $data_pred_hash ||
+                            $data_hash >= $data_primire_hash && $data_hash <= $data_pred_hash) {
+                            echo "<div class='alert alert-danger'>Acest vehicul este deja rezervat in intervalul <b>$data_primire</b> - <b>$data_pred</b>!<br>
+                            <a href=\"javascript:history.go(-1)\">Mergi inapoi.</a></div>";
+                            exit();
+                        }
+                    }
+
                     vQuery("INSERT INTO appointments (name, carid, data, data_predare, location, additions, phone) VALUES ('$nume', '$car', '$data', '$data_predare', '$location', '$additions', '$phone')");
-                    vQuery("UPDATE cars SET available = '0' WHERE id = '$car'");
-                    echo '<div class="alert alert-success">Felicitari! Ai rezervat aceasta masina incepand de la data de <b>'.$data.'</b> pana pe <b>'.$data_predare.'</b></div>';
+                    // vQuery("UPDATE cars SET available = '0' WHERE id = '$car'");
+                    echo '<div class="alert alert-success">Felicitari! Ai rezervat aceasta masina incepand de la data de <b>'.$data.'</b> pana pe <b>'.$data_predare.'</b><br>
+                        Insa, cererea ta va trebui sa mai treaca printr-un singur pas, si anume, aprobarea agentului! Acesta te va suna in cel mai scurt timp!</div>';
                 }
             }
             //------------------------------------------------------//
@@ -67,13 +88,19 @@ else
                 </div>
                 </div>";
             echo '<hr>';
-            if(!$available)
-                echo "<div class='alert alert-danger'>Acest vehicul a fost deja inchiriat!</div>";
-            else if(!isset($_SESSION['auth']))
+            if(!isset($_SESSION['auth']))
                 echo "<div class='alert alert-danger'>Trebuie sa fii autentificat pentru a putea rezerva aceasta masina!</div>";
             else
             {
                 echo '<center><h2>Rezerva aceasta masina!</h2></center><br>';
+                if($rowCount)
+                {
+                    $today = strtotime(date("d-m-Y"));
+                    if($today < $data_primire_hash)
+                        echo '<div class="alert alert-danger">Acest vehicul poate fi inchiriat incepand de <b>AZI</b> pana pe data de <b>'.$data_primire.'</b>!</div>';
+                    else if($today >= $data_primire_hash && $today <= $data_pred_hash)
+                        echo '<div class="alert alert-danger">Acest vehicul este disponibil incapand cu data de <b>'.$data_pred.'</b>!</div>';
+                }
                 echo '<div class="alert alert-primary"><b>IMPORTANT!</b> Predarea masinii se va face la ora <b>8:00 AM</b>. Pentru stabilirea altei ore, precizati in sectiunea <b>"alte specificatii"</b></div><hr>';
                 echo '<form method="POST" action="">';
                 echo '<div class="row">';

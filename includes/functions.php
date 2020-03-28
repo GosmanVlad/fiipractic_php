@@ -5,13 +5,15 @@ require("mysql.php");
 
 function category_Menu($page)
 {
+    $category2 = vQuery_Select("SELECT * FROM cars_category");
+    $category2->execute();
+    /*******************************************************/
     echo '<center>';
     if($page==0)
         echo"<a href='".URL."cars.php' style='margin-left:5px;' class='btn btn-danger'>Toate masinile</a>";
     else
         echo"<a href='".URL."cars.php' style='margin-left:5px;' class='btn btn-primary'>Toate masinile</a>";
-    $category2 = vQuery_Select("SELECT * FROM cars_category");
-    $category2->execute();
+    
     foreach($category2 as $row)
     {
         $id = $row['id']; 
@@ -23,6 +25,7 @@ function category_Menu($page)
     }
     echo '</center><hr>';
 }
+
 function vQuery($query)
 {
     require("mysql.php");
