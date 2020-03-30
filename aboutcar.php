@@ -13,33 +13,33 @@ if($rowCount) {
     $data_primire_hash = strtotime(str_replace("/","-", $rowApp['data']));
     $data_pred = $rowApp['data_predare'];
     $data_primire =$rowApp['data'];
-
 }
 /*******************************************************/
+$result = vQuery_Select("SELECT *,ct.name as carName,  cat.name as categoryName FROM cars as ct JOIN cars_category as cat ON cat.id=ct.category WHERE ct.id = '$carid'");
+$result->execute();
+$row = $result->fetch();
+//----------------------------//
+$name = $row['carName'];
+$category = $row['category'];
+$combustible = $row['combustible'];
+$seats = $row['seats'];
+$consumption = $row['consumption'];
+$capacity = $row['engine_capacity'];
+$facilities = $row['facilities'];
+$image = $row['image'];
+$transmission = $row['transmission'];
+$price = $row['price'];
+$power = $row['power'];
+$category_name = $row['categoryName'];
+/*******************************************************/
+$result2 = vQuery_Select("SELECT * FROM locations");
+$result2->execute();
+/*******************************************************/
 ?>
-
 <body>
     <?php Menu() ?>
     <div class="body-container"><div class="body-wall"><br>
-
         <?php 
-            $result = vQuery_Select("SELECT *,ct.name as carName,  cat.name as categoryName FROM cars as ct JOIN cars_category as cat ON cat.id=ct.category WHERE ct.id = '$carid'");
-            $result->execute();
-            $row = $result->fetch();
-            //------------------------------------------------------//
-            $name = $row['carName'];
-            $category = $row['category'];
-            $combustible = $row['combustible'];
-            $seats = $row['seats'];
-            $consumption = $row['consumption'];
-            $capacity = $row['engine_capacity'];
-            $facilities = $row['facilities'];
-            $image = $row['image'];
-            $transmission = $row['transmission'];
-            $price = $row['price'];
-            $power = $row['power'];
-            $category_name = $row['categoryName'];
-            //------------------------------------------------------//
             if(isset($_POST['sendbtn']))
             {
                 if(empty($_POST['nume']) || empty($_POST['telefon']) || empty($_POST['data']) || empty($_POST['data-predare']))
@@ -64,9 +64,7 @@ if($rowCount) {
                             exit();
                         }
                     }
-
                     vQuery("INSERT INTO appointments (name, carid, data, data_predare, location, additions, phone) VALUES ('$nume', '$car', '$data', '$data_predare', '$location', '$additions', '$phone')");
-                    // vQuery("UPDATE cars SET available = '0' WHERE id = '$car'");
                     echo '<div class="alert alert-success">Felicitari! Ai rezervat aceasta masina incepand de la data de <b>'.$data.'</b> pana pe <b>'.$data_predare.'</b><br>
                         Insa, cererea ta va trebui sa mai treaca printr-un singur pas, si anume, aprobarea agentului! Acesta te va suna in cel mai scurt timp!</div>';
                 }
@@ -97,7 +95,7 @@ if($rowCount) {
                 {
                     $today = strtotime(date("d-m-Y"));
                     if($today < $data_primire_hash)
-                        echo '<div class="alert alert-danger">Acest vehicul poate fi inchiriat incepand de <b>AZI</b> pana pe data de <b>'.$data_primire.'</b>!</div>';
+                        echo '<div class="alert alert-danger">Acest vehicul poate fi inchiriat incepand de <b>AZI</b> pana pe data de <b>'.$data_primire.'</b>, respectiv dupa data de <b>'.$data_pred.'</b>!</div>';
                     else if($today >= $data_primire_hash && $today <= $data_pred_hash)
                         echo '<div class="alert alert-danger">Acest vehicul este disponibil incapand cu data de <b>'.$data_pred.'</b>!</div>';
                 }
@@ -115,9 +113,6 @@ if($rowCount) {
                 echo '<div class="col-sm"><label>Data predarii:</label>
                       <input type="text" name="data-predare" placeholder="ziua/luna/anul" class="form-control"></div>';
                 echo "</div><br>";
-
-                $result2 = vQuery_Select("SELECT * FROM locations");
-                $result2->execute();
 
                 echo '<div class="form-group">
                     <label>Locatia ridicarii:</label>
