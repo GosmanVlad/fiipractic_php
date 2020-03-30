@@ -4,6 +4,8 @@ if(empty($_GET['carid']))
 else
     $carid = $_GET['carid'];
 /*******************************************************/
+$today = strtotime(date("d-m-Y"));
+/*******************************************************/
 $alreadyBooked = vQuery_Select("SELECT * FROM appointments WHERE carid = '$carid' ORDER BY id DESC");
 $alreadyBooked->execute();
 $rowCount = $alreadyBooked->rowCount();
@@ -91,9 +93,7 @@ $result2->execute();
             else
             {
                 echo '<center><h2>Rezerva aceasta masina!</h2></center><br>';
-                if($rowCount)
-                {
-                    $today = strtotime(date("d-m-Y"));
+                if($rowCount) {
                     if($today < $data_primire_hash)
                         echo '<div class="alert alert-danger">Acest vehicul poate fi inchiriat incepand de <b>AZI</b> pana pe data de <b>'.$data_primire.'</b>, respectiv dupa data de <b>'.$data_pred.'</b>!</div>';
                     else if($today >= $data_primire_hash && $today <= $data_pred_hash)
