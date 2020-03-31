@@ -3,25 +3,26 @@ session_start();
 define("URL", "http://localhost:8080/rental/");
 require("mysql.php");
 
-function category_Menu($page)
+function category_Menu($page, $type)
 {
     $category2 = vQuery_Select("SELECT * FROM cars_category");
     $category2->execute();
+    $type == 1 ? $url = 'cars.php' : $url = 'promotions.php';
     /*******************************************************/
     echo '<center>';
     if($page==0)
-        echo"<a href='".URL."cars.php' style='margin-left:5px;' class='btn btn-danger'>Toate masinile</a>";
+        echo"<a href='".URL."$url' style='margin-left:5px;' class='btn btn-danger'>Toate masinile</a>";
     else
-        echo"<a href='".URL."cars.php' style='margin-left:5px;' class='btn btn-primary'>Toate masinile</a>";
+        echo"<a href='".URL."$url' style='margin-left:5px;' class='btn btn-primary'>Toate masinile</a>";
     
     foreach($category2 as $row)
     {
         $id = $row['id']; 
         $name = $row['name'];
         if($page == $id)
-            echo"<a href='".URL."cars.php?category=$id' style='margin-left:5px;'class='btn btn-danger'>$name</a>";
+            echo"<a href='".URL."$url?category='$id style='margin-left:5px;'class='btn btn-danger'>$name</a>";
         else
-            echo"<a href='".URL."cars.php?category=$id' style='margin-left:5px;' class='btn btn-primary'>$name</a>";
+            echo"<a href='".URL."$url?category=$id' style='margin-left:5px;' class='btn btn-primary'>$name</a>";
     }
     echo '</center><hr>';
 }
@@ -48,7 +49,7 @@ function Menu()
     echo "<li class='menu-item'><a href='index.php'>Acasa</a></li>";
     echo "<li class='menu-item'><a href='about.php'>Despre noi</a></li>";
     echo "<li class='menu-item'><a href='cars.php'>Masini</a></li>";
-    echo "<li class='menu-item'><a href='ask_offer.php'>Cere o oferta</a></li>";
+    echo "<li class='menu-item'><a href='promotions.php'>Promotii</a></li>";
     if(isset($_SESSION['auth']))
     {
         $name = $_SESSION['name'];

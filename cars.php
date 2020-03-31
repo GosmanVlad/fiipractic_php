@@ -20,7 +20,7 @@ $category->execute();
     <div class="body-container"><div class="body-wall"><br>
         <h1>Toate masinile</h1><hr>
         <?php
-            category_Menu($pagid);
+            category_Menu($pagid, 1);
             foreach($category as $row2)
             {
 
