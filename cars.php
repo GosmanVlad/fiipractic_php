@@ -1,7 +1,18 @@
 <?php include('header.php'); 
 if(!isset($_GET['category']))
     $_GET['category'] = 0;
+
 $pagid = $_GET['category'];
+
+if($pagid == 0)
+    $category = vQuery_Select("SELECT cat.id as categoryID, cat.name as categoryName, ct.combustible, ct.transmission, ct.engine_capacity, ct.price, ct.id as car_id, ct.name, ct.image 
+                                FROM cars_category as cat 
+                                JOIN cars as ct ON cat.id=ct.category");
+else
+    $category = vQuery_Select("SELECT cat.id as categoryID, cat.name as categoryName, ct.combustible, ct.transmission, ct.engine_capacity, ct.price, ct.id as car_id, ct.name, ct.image 
+                                FROM cars_category as cat 
+                                JOIN cars as ct ON cat.id=ct.category WHERE cat.id='$pagid'");
+$category->execute();
 ?>
 
 <body>
@@ -9,17 +20,6 @@ $pagid = $_GET['category'];
     <div class="body-container"><div class="body-wall"><br>
         <h1>Toate masinile</h1><hr>
         <?php
-
-            if($pagid == 0)
-                $category = vQuery_Select("SELECT cat.id as categoryID, cat.name as categoryName, ct.combustible, ct.transmission, ct.engine_capacity, ct.price, ct.id as car_id, ct.name, ct.image 
-                                            FROM cars_category as cat 
-                                            JOIN cars as ct ON cat.id=ct.category");
-            else
-                $category = vQuery_Select("SELECT cat.id as categoryID, cat.name as categoryName, ct.combustible, ct.transmission, ct.engine_capacity, ct.price, ct.id as car_id, ct.name, ct.image 
-                                            FROM cars_category as cat 
-                                            JOIN cars as ct ON cat.id=ct.category WHERE cat.id='$pagid'");
-            $category->execute();
-
             category_Menu($pagid);
             foreach($category as $row2)
             {

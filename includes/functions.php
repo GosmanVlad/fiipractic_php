@@ -48,7 +48,7 @@ function Menu()
     echo "<li class='menu-item'><a href='index.php'>Acasa</a></li>";
     echo "<li class='menu-item'><a href='about.php'>Despre noi</a></li>";
     echo "<li class='menu-item'><a href='cars.php'>Masini</a></li>";
-    echo "<li class='menu-item'><a href='index.php'>Cere o oferta</a></li>";
+    echo "<li class='menu-item'><a href='ask_offer.php'>Cere o oferta</a></li>";
     if(isset($_SESSION['auth']))
     {
         $name = $_SESSION['name'];

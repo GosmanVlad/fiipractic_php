@@ -17,11 +17,15 @@ if($rowCount) {
     $data_primire =$rowApp['data'];
 }
 /*******************************************************/
-$result = vQuery_Select("SELECT *,ct.name as carName,  cat.name as categoryName FROM cars as ct JOIN cars_category as cat ON cat.id=ct.category WHERE ct.id = '$carid'");
+$result = vQuery_Select("SELECT ct.*, cat.name as categoryName 
+                        FROM cars as ct 
+                        JOIN cars_category as cat 
+                        ON cat.id=ct.category 
+                        WHERE ct.id = '$carid'");
 $result->execute();
 $row = $result->fetch();
 //----------------------------//
-$name = $row['carName'];
+$name = $row['name'];
 $category = $row['category'];
 $combustible = $row['combustible'];
 $seats = $row['seats'];

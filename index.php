@@ -1,5 +1,13 @@
-<?php include('header.php'); ?>
+<?php include('header.php');
 
+$result = vQuery_Select("SELECT ct.*, cat.name as categoryName 
+                        FROM `cars` as ct 
+                        JOIN `cars_category` as cat 
+                        ON cat.id=ct.category 
+                        ORDER BY ct.id 
+                        DESC LIMIT 5");
+$result->execute();
+?>
 <body>
     <?php Menu() ?>
     <div class="body-container"><div class="body-wall"><br>
@@ -7,24 +15,16 @@
         <center><p>Ai nimerit locul potrivit! Vezi mai jos ultimele noastre oferte.</center>
         <hr>
         <?php
-
-        $result = vQuery_Select("SELECT * FROM `cars` ORDER BY id DESC LIMIT 5");
-        $result->execute();
         if($result->rowCount() > 0) {
-           foreach($result as $row)
+           foreach($result as $row) 
            {
-               $result2 = vQuery_Select("SELECT * FROM `cars_category` WHERE `id` = ".$row["category"]."");
-                $result2->execute();
+                $combustible = $row['combustible'];
+                $transmission = $row['transmission'];
+                $capacity = $row['engine_capacity'];
+                $price = $row['price'];
                 echo "<div class='box-container'>";
                 echo "<img class='box-image' src ='".URL."images/".$row["image"]."'></img><hr>";
-                if($result2->rowCount()) {
-                    $row2 = $result2->fetch();
-                    $combustible = $row['combustible'];
-                    $transmission = $row['transmission'];
-                    $capacity = $row['engine_capacity'];
-                    $price = $row['price'];
-                    echo "<p><b>".$row["name"]." (Categorie: ".$row2['name'].")</b></p>";
-                }
+                echo "<p><b>".$row["name"]." (Categorie: ".$row['categoryName'].")</b></p>";
                 echo "<p style='font-size:13px;'><i class='fa fa-check'></i> $transmission<br>";
                 echo "<i class='fa fa-check'></i> $combustible<br>";
                 echo "<i class='fa fa-check'></i> <b>Capacitate motor:</b> $capacity<p>";
