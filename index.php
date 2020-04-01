@@ -1,5 +1,8 @@
 <?php include('header.php');
 
+if(isset($_SESSION['auth'])) 
+    $name = $_SESSION['name'];
+
 $result = vQuery_Select("SELECT ct.*, cat.name as categoryName 
                         FROM `cars` as ct 
                         JOIN `cars_category` as cat 
@@ -35,7 +38,7 @@ $result->execute();
         ?>
         <hr><br>
         <center><p style="font-size:17px;font-style:italic;">Daca una din optiunile de mai sus nu te-a atras, atunci viziteaza si pagina cu <a href="cars.php">toate masinile</a> noastre
-        <br>sau, poti cere o oferta speciala pe pagina <a href="request.php">"Cere o oferta"</a>!</p></center>
+        <br>sau urmareste promotiile saptamanale pe pagina de <a href="promotions.php">"Promotii"</a>!</p></center>
         <hr>
         <?php Testimonials(); ?>
     </div></div>
