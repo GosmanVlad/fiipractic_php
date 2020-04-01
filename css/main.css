@@ -44,6 +44,16 @@ body {
     padding:20px;
 }
 
+.body-wall-profile {
+    padding: 5px 5px 0px 20px;
+    display:inline-block;
+}
+
+.body-wall-profile-side {
+    padding-right:0;
+    padding-left:0;
+}
+
 .body-container h1 {
     font-family: Arial, Helvetica, sans-serif;
     text-align:center;

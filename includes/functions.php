@@ -42,6 +42,15 @@ function vQuery_Select($query)
     return $statement;
 }
 
+function Profile_Sidebar()
+{
+    echo '<div class="body-wall-profile-side col-3">
+    <i class="fa fa-user"></i> <a href="profile.php">Masini inchiriate</a><hr>
+    <i class="fa fa-user"></i> <a href="settings.php">Setari cont</a><hr>
+    <i class="fa fa-user"></i> <a href="logout.php">Deconectare</a><hr>
+    </div>';
+}
+
 function Menu()
 {
     echo '<center><img src="images/logo.png" style="width:350; height:150;"></img></center>';
@@ -53,7 +62,7 @@ function Menu()
     if(isset($_SESSION['auth']))
     {
         $name = $_SESSION['name'];
-        echo "<div style='float:right;><i class='fa fa-user' style='color:white'></i> <li class='menu-item'><a href='logout.php'><i class='fa fa-user' style='color:white'></i> Salut, $name!</a> / <i class='fa fa-times' style='color:white;'></i><a href='logout.php'>Log Out</a></li>";
+        echo "<div style='float:right;><i class='fa fa-user' style='color:white'></i> <li class='menu-item'><a href='profile.php'><i class='fa fa-user' style='color:white'></i> Salut, $name!</a> / <i class='fa fa-times' style='color:white;'></i><a href='logout.php'>Log Out</a></li>";
     }
     else
         echo "<div style='float:right;'><li class='menu-item'><a href='register.php'><i class='fa fa-user-plus' style='color:white'></i> Inregistrare</a> / <a href='login.php'> <i class='fa fa-address-card' style='color:white'></i> Autentificare</a></li></div>";

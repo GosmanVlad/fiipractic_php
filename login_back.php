@@ -34,9 +34,6 @@
                     }
                     else
                     {
-                        echo $row['password'];
-                        echo '<br>';
-                        echo $password;
                         echo '<div class="alert alert-danger" role="alert">
                         Parola sau username gresit! Mergi inapoi la <a href="'.URL.'login.php">autentificare</a>!
                         </div>';
