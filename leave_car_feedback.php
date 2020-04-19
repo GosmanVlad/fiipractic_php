@@ -4,7 +4,7 @@ header("Location: index.php");
 else
 {
     $carid=$_GET['carid'];
-    $result = vQuery_Select("SELECT name, image FROM cars WHERE id='$carid'");
+    $result = dbQuery("SELECT name, image FROM cars WHERE id='$carid'");
     $result->execute();
     $row=$result->fetch();
     $carName = $row['name'];
@@ -16,7 +16,7 @@ else
     <?php Menu() ?>
     <div class="body-container"><div class="body-wall"><br>
         <h1>Feedback pentru masina <?php echo $carName ?></h1>
-        <center><p><div class='box-container'><img src='images/<?php echo $carImage?>'></img></div></center>
+        <div class="centerText"><p><div class='box-container'><img src='images/<?php echo $carImage?>'></img></div></div>
         <hr>
         <form method="POST" action="car_feedback_back.php">
             <?php 

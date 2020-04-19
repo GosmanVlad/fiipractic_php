@@ -4,7 +4,7 @@
     <?php Menu() ?>
     <div class="body-container"><div class="body-wall"><br>
         <h1>Autentificare cont</h1>
-        <center><p>Daca inca nu ai un cont, iti poti inregistra unul <a href='<?php ". URL ." ?>register.php'>aici</a>!</center>
+        <div class="centerText"><p>Daca inca nu ai un cont, iti poti inregistra unul <a href='<?php ". URL ." ?>register.php'>aici</a>!</div>
         <hr>
         <?php
             if(empty($_POST['username']) || empty($_POST['password']))
@@ -14,7 +14,7 @@
                 $username = $_POST['username'];
                 $password = md5($_POST['password']);
 
-                $result = vQuery_Select("SELECT * FROM users WHERE name = '$username'");
+                $result = dbQuery("SELECT * FROM users WHERE name = '$username'");
                 $result->execute();
                 $row = $result->fetch();
 

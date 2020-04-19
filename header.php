@@ -12,4 +12,10 @@
 <script type="text/javascript" src="<?php '.URL.'?>js/bootstrap.bundle.js"></script>
 <script type="text/javascript" src="<?php '.URL.'?>js/bootstrap.bundle.min.js"></script>
 
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
+
 </head>

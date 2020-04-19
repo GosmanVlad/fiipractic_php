@@ -5,14 +5,14 @@ if(!isset($_GET['category']))
 $pagid = $_GET['category'];
 
 if($pagid == 0)
-    $category = vQuery_Select("SELECT ct.*, prt.newPrice, prt.oldPrice, prt.until, cat.name as categoryName 
+    $category = dbQuery("SELECT ct.*, prt.newPrice, prt.oldPrice, prt.until, cat.name as categoryName 
                             FROM promotions as prt 
                             JOIN cars as ct 
                             ON prt.car_id = ct.id 
                             JOIN cars_category as cat 
                             ON ct.category=cat.id");
 else
-    $category = vQuery_Select("SELECT ct.*, prt.newPrice, prt.oldPrice, prt.until, cat.name as categoryName 
+    $category = dbQuery("SELECT ct.*, prt.newPrice, prt.oldPrice, prt.until, cat.name as categoryName 
                             FROM promotions as prt 
                             JOIN cars as ct 
                             ON prt.car_id = ct.id 
@@ -44,9 +44,9 @@ $category->execute();
                 echo "<p style='font-size:13px;'><i class='fa fa-check'></i> $transmission<br>";
                 echo "<i class='fa fa-check'></i> $combustible<br>";
                 echo "<i class='fa fa-check'></i> <b>Capacitate motor:</b> $capacity<p>";
-                echo "<center><b style='color:red'><strike>$oldPrice <i class='fa fa-euro'></i> / day</strike></b><br><b style='color:green'>$newPrice <i class='fa fa-euro'></i> / day</b><br>
-                <span class='badge badge-danger' style='padding:5px;'>PROMOTIE PANA PE $until !</span></center>";
-                echo "<p><center><a href='".URL."aboutcar.php?carid=$car_id' class='btn btn-primary'>Afla mai multe detalii</a></center></p></div>";
+                echo " <div class='centerText'><b style='color:red'><strike>$oldPrice <i class='fa fa-euro'></i> / day</strike></b><br><b style='color:green'>$newPrice <i class='fa fa-euro'></i> / day</b><br>
+                <span class='badge badge-danger' style='padding:5px;'>PROMOTIE PANA PE $until !</span></div>";
+                echo "<p> <div class='centerText'><a href='".URL."aboutcar.php?carid=$car_id' class='btn btn-primary'>Afla mai multe detalii</a></div></p></div>";
             }?>
     </div></div>
 

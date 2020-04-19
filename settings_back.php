@@ -9,7 +9,7 @@ else
     <?php Menu() ?>
     <div class="body-container"><div class="body-wall"><br>
     <h1>Salut, <?php echo $name ?> !</h1>
-        <center><p>Ti-am atasat aici cateva detalii despre contul tau si demersul acestuia pe website-ul nostru!</center>
+    <div class="centerText"><p>Ti-am atasat aici cateva detalii despre contul tau si demersul acestuia pe website-ul nostru!</div>
         <hr>
         <?php
             if(empty($_POST['oldPassword']) || empty($_POST['newPassword']))
@@ -19,7 +19,7 @@ else
                 $oldPassword = md5($_POST['oldPassword']);
                 $newPassword = md5($_POST['newPassword']);
 
-                $result = vQuery_Select("SELECT * FROM users WHERE name = '$name'");
+                $result = dbQuery("SELECT * FROM users WHERE name = '$name'");
                 $result->execute();
                 $row = $result->fetch();
 

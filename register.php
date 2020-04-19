@@ -6,7 +6,7 @@ header("Location: index.php");?>
     <?php Menu() ?>
     <div class="body-container"><div class="body-wall"><br>
         <h1>Inregistrare cont</h1>
-        <center><p>Inregistreaza-ti un cont pentru a beneficia in intregime de ofertele personalizate facute de noi.</center>
+        <div class="centerText"><p>Inregistreaza-ti un cont pentru a beneficia in intregime de ofertele personalizate facute de noi.</div>
         <hr>
         <form method="POST" action="register_back.php">
             <div class="container">
@@ -29,7 +29,7 @@ header("Location: index.php");?>
                 </div>
             </div>
             <hr>
-            <button type="submit" class="btn btn-danger">Inregistreaza</button>
+            <div class="centerText"><button type="submit" class="btn btn-danger">Inregistreaza</button></div>
         </form>
     </div></div>
 

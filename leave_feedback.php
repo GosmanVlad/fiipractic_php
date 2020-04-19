@@ -12,7 +12,7 @@ if(isset($_SESSION['auth']))
 {
     $id = $_SESSION['userid'];
 
-    $result = vQuery_Select("SELECT `email` FROM users WHERE `id` = '$id'");
+    $result = dbQuery("SELECT `email` FROM users WHERE `id` = '$id'");
     $result->execute();
     $row2 = $result->fetch();
 
@@ -25,7 +25,7 @@ else
 <body>
     <?php Menu() ?>
     <div class="body-container"><div class="body-wall"><br>
-        <center><h3>Leave a feedback</h1></center>
+    <div class="centerText"><h3>Leave a feedback</h1></div>
         <hr>
         <?php
             $result = vQuery("INSERT INTO testimonials (id, name, email, feedback) VALUES (NULL, '$username', '$email', '$feedback')");

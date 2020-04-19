@@ -4,7 +4,7 @@
     <?php Menu() ?>
     <div class="body-container"><div class="body-wall"><br>
         <h1>Inregistrare cont</h1>
-        <center><p>Inregistreaza-ti un cont pentru a beneficia in intregime de ofertele personalizate facute de noi.</center>
+        <div class="centerText"><p>Inregistreaza-ti un cont pentru a beneficia in intregime de ofertele personalizate facute de noi.</div>
         <hr>
         <?php
             if(empty($_POST['username']) || empty($_POST['password']) || empty($_POST['email']))

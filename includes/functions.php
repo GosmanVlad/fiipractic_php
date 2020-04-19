@@ -1,11 +1,11 @@
 <?php
 session_start();
-define("URL", "http://localhost:8080/rental/");
+define("URL", "http://localhost/rent/");
 require("mysql.php");
 
 function category_Menu($page, $type)
 {
-    $category2 = vQuery_Select("SELECT * FROM cars_category");
+    $category2 = dbQuery("SELECT * FROM cars_category");
     $category2->execute();
     $type == 1 ? $url = 'cars.php' : $url = 'promotions.php';
     /*******************************************************/
@@ -33,7 +33,7 @@ function vQuery($query)
     $conn->exec($query);
 }
 
-function vQuery_Select($query)
+function dbQuery($query)
 {
     require("mysql.php");
     $statement = $conn->prepare($query);
@@ -83,7 +83,7 @@ function Testimonials()
     echo '<h1>Testimoniale</h1>
     <center><p style="font-size:17px;font-style:italic;">Iata cateva dintre parerile clientilor nostrii:</p></center>';
 
-    $result = vQuery_Select("SELECT * FROM testimonials ORDER BY id DESC LIMIT 3");
+    $result = dbQuery("SELECT * FROM testimonials ORDER BY id DESC LIMIT 3");
     $result->execute();
 
     echo '<div class="row">';

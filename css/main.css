@@ -125,4 +125,19 @@ p {
     border-radius:1px;
 }
 
+.font13 {
+    font-size:13px;
+}
 
+.colorGreen {
+    color:green;
+}
+
+.pInfo {
+    font-size:17px;
+    font-style:italic;
+}
+
+.centerText {
+    text-align: center;
+}

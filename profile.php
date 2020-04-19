@@ -4,7 +4,7 @@ if(!isset($_SESSION['name']))
 else
 {
     $name = $_SESSION['name'];
-    $result = vQuery_Select("SELECT appt.data_predare, appt.data, appt.carid, ct.name 
+    $result = dbQuery("SELECT appt.data_predare, appt.data, appt.carid, ct.name 
                             FROM appointments as appt 
                             JOIN cars as ct 
                             ON appt.carid=ct.id 
@@ -20,12 +20,12 @@ else
     <div class="body-container"><div class="body-wall">
     <br>
         <h1>Salut, <?php echo $name ?> !</h1>
-        <center><p>Ti-am atasat aici cateva detalii despre contul tau si demersul acestuia pe website-ul nostru!</center>
+        <div class="centerText"><p>Ti-am atasat aici cateva detalii despre contul tau si demersul acestuia pe website-ul nostru!</div>
         <hr>
     
         <div class="row">
             <div class="body-wall-profile col-9">
-                <center><h3>Masinile inchiriate de-a lungul timpului</h3></center><br>
+            <div class="centerText"><h3>Masinile inchiriate de-a lungul timpului</h3></div><br>
                 <table class="table">
                 <thead class="thead-dark">
                     <tr>

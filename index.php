@@ -1,9 +1,9 @@
 <?php include('header.php');
 
-if(isset($_SESSION['auth'])) 
+if(isset($_SESSION['name'])) 
     $name = $_SESSION['name'];
 
-$result = vQuery_Select("SELECT ct.*, cat.name as categoryName 
+$result = dbQuery("SELECT ct.*, cat.name as categoryName 
                         FROM `cars` as ct 
                         JOIN `cars_category` as cat 
                         ON cat.id=ct.category 
@@ -15,59 +15,58 @@ $result->execute();
     <?php Menu() ?>
     <div class="body-container"><div class="body-wall"><br>
         <h1>Ai nevoie de o masina?</h1>
-        <center><p>Ai nimerit locul potrivit! Vezi mai jos ultimele noastre oferte.</center>
+        <div class="centerText"><p>Ai nimerit locul potrivit! Vezi mai jos ultimele noastre oferte.</div>
         <hr>
         <?php
-        if($result->rowCount() > 0) {
-           foreach($result as $row) 
-           {
-                $combustible = $row['combustible'];
-                $transmission = $row['transmission'];
-                $capacity = $row['engine_capacity'];
-                $price = $row['price'];
-                echo "<div class='box-container'>";
-                echo "<img class='box-image' src ='".URL."images/".$row["image"]."'></img><hr>";
-                echo "<p><b>".$row["name"]." (Categorie: ".$row['categoryName'].")</b></p>";
-                echo "<p style='font-size:13px;'><i class='fa fa-check'></i> $transmission<br>";
-                echo "<i class='fa fa-check'></i> $combustible<br>";
-                echo "<i class='fa fa-check'></i> <b>Capacitate motor:</b> $capacity<p>";
-                echo "<center><b style='color:green'>$price <i class='fa fa-euro'></i> / day</b></center>";
-                echo "<p><center><a href='".URL."aboutcar.php?carid=".$row['id']."' class='btn btn-primary'>Afla mai multe detalii</a></center></p></div>";
-           }
-        }
+        if ($result) :
+            foreach ($result as $row) : ?>
+                <div class='box-container'>
+                    <img class='box-image' src ='images/<?= $row["image"] ?>' alt='Imageine' /><hr />
+                    <p><b><?= $row["name"] ?>(Categorie: <?= $row['categoryName'] ?>)</b></p>
+                    <p style='font-size:13px;'>
+                        <i class='fa fa-check'></i><?= $row['transmission'] ?><br>
+                        <i class='fa fa-check'></i><?= $row['combustible'] ?><br>
+                        <i class='fa fa-check'></i><b>Capacitate motor:</b> <?= $row['engine_capacity'] ?>
+                    <p>
+                    <p style='color:green; text-align: center;'><b><?= $row['price'] ?> <i class='fa fa-euro'></i> / day</b></p>
+                    <p style='text-align: center;'>
+                        <a href='aboutcar.php?carid=<?= $row['id'] ?>' class='btn btn-primary'>Afla mai multe detalii</a>
+                    </p>
+                </div>
+            <?php endforeach;
+        endif;
         ?>
         <hr><br>
-        <center><p style="font-size:17px;font-style:italic;">Daca una din optiunile de mai sus nu te-a atras, atunci viziteaza si pagina cu <a href="cars.php">toate masinile</a> noastre
-        <br>sau urmareste promotiile saptamanale pe pagina de <a href="promotions.php">"Promotii"</a>!</p></center>
+        <div class="centerText"><p class="pInfo">Daca una din optiunile de mai sus nu te-a atras, atunci viziteaza si pagina cu <a href="cars.php">toate masinile</a> noastre
+        <br>sau urmareste promotiile saptamanale pe pagina de <a href="promotions.php">"Promotii"</a>!</p></div>
         <hr>
         <?php Testimonials(); ?>
     </div></div>
     
     <div class="body-container"><div class="body-wall">
-    <center><h3>Leave a feedback</h3></center><br>
-    <form method="POST" action="leave_feedback.php">
-        <?php 
-            if(isset($_SESSION['auth'])) {
-                $name = $_SESSION['name'];
-                echo '<label>Nume:</label>';
-                echo '<input type="text" name="username" class="form-control" value="'.$name.'" readonly>';
-            }
-            else {
-                echo '<div class="row">
-                <div class="col-sm">';
-                echo '<label>Nume:</label>';
-                echo '<input type="text" name="username" class="form-control" placeholder="Numele tau"></div>';
+    <div class="centerText"><h3>Leave a feedback</h3></div><br>
 
-                echo '<div class="col-sm">';
-                echo '<label>Email:</label>';
-                echo '<input type="text" name="email" class="form-control" placeholder="Email-ul tau"></div>';
-                echo '</div>';
-            }
-        ?><br>
+    <form method="POST" action="leave_feedback.php">
+        <?php $name = isset($_SESSION['name']) ? $_SESSION['name'] : null; ?>
+        <?php if ($name) : ?>
+            <input type="text" name="username" class="form-control" placeholder="Numele tau" value="<?= $name ?>" readonly /><br />
+        <?php else : ?>
+            <div class="row">
+                <div class="col-sm">
+                    <label>Nume:</label>
+                    <input type="text" name="username" class="form-control" placeholder="Numele tau" />
+                </div>
+                <div class="col-sm">
+                    <label>Email:</label>
+                    <input type="text" name="email" class="form-control" placeholder="Email-ul tau">
+                </div>
+            </div>
+        <?php endif; ?>
         <label>Feedback</label>
         <textarea class="form-control" rows="5" name="feedback"></textarea><br>
         <button type="submit" class="btn btn-success btn-block">Trimite</button>
     </form>
+
     </div></div>
 
 

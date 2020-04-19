@@ -7,7 +7,7 @@ if(isset($_SESSION['auth']))
     <?php Menu() ?>
     <div class="body-container"><div class="body-wall"><br>
         <h1>Autentificare cont</h1>
-        <center><p>Daca inca nu ai un cont, iti poti inregistra unul <a href='<?php ". URL ." ?>register.php'>aici</a>!</center>
+        <div class="centerText"><p>Daca inca nu ai un cont, iti poti inregistra unul <a href='<?php ". URL ." ?>register.php'>aici</a>!</div>
         <hr>
         <form method="POST" action="login_back.php">
             <div class="container">
@@ -22,7 +22,7 @@ if(isset($_SESSION['auth']))
                     </div>
                 </div>
             </div><hr>
-            <button type="submit" class="btn btn-primary">Autentificare</button>
+            <div class="centerText"><button type="submit" class="btn btn-primary">Autentificare</button></div>
         </form>
     </div></div>
 
