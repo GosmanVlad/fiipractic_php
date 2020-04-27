@@ -144,6 +144,12 @@ $result2->execute();
                         <button type="submit" class="btn btn-success btn-block" name="sendbtn">Trimite</button>
                     </form> <?php
                 } ?>
+    </div>
+    </div>
+
+    <div class="body-container"><div class="body-wall">
+        <div class="centerText"><h3>Vezi ce spun clientii despre masina</h3></div><br>
+            <?php Car_Testimonials($carid); ?>
     </div></div>
     <?php Footer() ?>
 </body>

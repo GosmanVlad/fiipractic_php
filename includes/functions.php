@@ -45,9 +45,9 @@ function dbQuery($query)
 function Profile_Sidebar()
 {
     echo '<div class="body-wall-profile-side col-3">
-    <i class="fa fa-user"></i> <a href="profile.php">Masini inchiriate</a><hr>
+    <i class="fa fa-car"></i> <a href="profile.php">Masini inchiriate</a><hr>
     <i class="fa fa-user"></i> <a href="settings.php">Setari cont</a><hr>
-    <i class="fa fa-user"></i> <a href="logout.php">Deconectare</a><hr>
+    <i class="fa fa-sign-out"></i> <a href="logout.php">Deconectare</a><hr>
     </div>';
 }
 
@@ -84,6 +84,26 @@ function Testimonials()
     <center><p style="font-size:17px;font-style:italic;">Iata cateva dintre parerile clientilor nostrii:</p></center>';
 
     $result = dbQuery("SELECT * FROM testimonials ORDER BY id DESC LIMIT 3");
+    $result->execute();
+
+    echo '<div class="row">';
+    foreach($result as $row)
+    {
+        $name = $row['name'];
+        $feedback = $row['feedback'];
+        echo '<div class="col-sm">';
+        echo '<div class="testimonials">';
+        echo "<h3>$name</h3>";
+        echo "$feedback";
+        echo '</div>';
+        echo '</div>';
+    }
+    echo '</div>';
+}
+
+function Car_Testimonials($carid)
+{
+    $result = dbQuery("SELECT * FROM car_feedback WHERE carid = '$carid' ORDER BY id DESC LIMIT 6");
     $result->execute();
 
     echo '<div class="row">';
