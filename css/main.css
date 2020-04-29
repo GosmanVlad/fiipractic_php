@@ -133,6 +133,10 @@ p {
     color:green;
 }
 
+.colorRed {
+    color:red;
+}
+
 .pInfo {
     font-size:17px;
     font-style:italic;
@@ -140,4 +144,10 @@ p {
 
 .centerText {
     text-align: center;
+}
+
+.textAdminCP {
+    font-size: 22px;
+    color: #fff;
+    text-shadow: 1px 1px 1px #969696;
 }

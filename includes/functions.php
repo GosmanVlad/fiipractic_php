@@ -43,50 +43,64 @@ function dbQuery($query)
 }
 
 function Profile_Sidebar()
-{
-    echo '<div class="body-wall-profile-side col-3">
+{ ?>
+    <div class="body-wall-profile-side col-3">
     <i class="fa fa-car"></i> <a href="profile.php">Masini inchiriate</a><hr>
     <i class="fa fa-user"></i> <a href="settings.php">Setari cont</a><hr>
     <i class="fa fa-sign-out"></i> <a href="logout.php">Deconectare</a><hr>
-    </div>';
+    </div> <?php
+}
+
+function Admin_Sidebar()
+{ ?>
+    <div class="body-wall-profile-side col-3">
+    <i class="fa fa-car"></i> <a href="admin_addcar.php">Adauga o masina</a><hr>
+    <i class="fa fa-star"></i> <a href="admin_addpromo.php">Adauga o promotie</a><hr>
+    <i class="fa fa-users"></i> <a href="admin_users.php">Utilizatori</a><hr>
+    </div> <?php
 }
 
 function Menu()
-{
-    echo '<center><img src="images/logo.png" style="width:350; height:150;"></img></center>';
-    echo "<div class='menu-container'><ul class='menu'>";
-    echo "<li class='menu-item'><a href='index.php'>Acasa</a></li>";
-    echo "<li class='menu-item'><a href='about.php'>Despre noi</a></li>";
-    echo "<li class='menu-item'><a href='cars.php'>Masini</a></li>";
-    echo "<li class='menu-item'><a href='promotions.php'>Promotii</a></li>";
-    if(isset($_SESSION['auth']))
-    {
-        $name = $_SESSION['name'];
-        echo "<div style='float:right;><i class='fa fa-user' style='color:white'></i> <li class='menu-item'><a href='profile.php'><i class='fa fa-user' style='color:white'></i> Salut, $name!</a> / <i class='fa fa-times' style='color:white;'></i><a href='logout.php'>Log Out</a></li>";
+{ ?>
+    <div class="centerText"><img src="images/logo.png" style="width:350; height:150;"></img></div>
+    <div class='menu-container'><ul class='menu'>
+    <li class='menu-item'><a href='index.php'>Acasa</a></li>
+    <li class='menu-item'><a href='about.php'>Despre noi</a></li>
+    <li class='menu-item'><a href='cars.php'>Masini</a></li>
+    <li class='menu-item'><a href='promotions.php'>Promotii</a></li> <?php
+
+    $name = isset($_SESSION['name']) ? $_SESSION['name'] : null;
+    $isAdmin = isset($_SESSION['admin']) ? $_SESSION['admin'] : null;
+    if($isAdmin) 
+        $AdminCP = " / <a href='admin_home.php'><i class='fa fa-briefcase' style='color:white'></i> Admin Panel</a>";
+    else
+        $AdminCP = '';
+    if($name)
+    { 
+        echo "<div style='float:right;><i class='fa fa-user' style='color:white'></i> <li class='menu-item'><a href='profile.php'><i class='fa fa-user' style='color:white'></i> Salut, $name!</a>$AdminCP / <i class='fa fa-times' style='color:white;'></i><a href='logout.php'>Log Out</a></li>";
     }
     else
         echo "<div style='float:right;'><li class='menu-item'><a href='register.php'><i class='fa fa-user-plus' style='color:white'></i> Inregistrare</a> / <a href='login.php'> <i class='fa fa-address-card' style='color:white'></i> Autentificare</a></li></div>";
-    echo "</ul></div>";
+    ?> </ul></div> <?php
 }
 
 function Footer()
-{
-    echo 
-        "<div class='footer'>
+{ ?>
+    <div class='footer'>
             Copyright @ 2020 - Car Rental
             <div style='float:right;margin-right:5px;'><a href='index.php'>Pagina principala</a></div>
-        </div><br>";
+        </div><br> <?php
 }
 
 function Testimonials()
-{
-    echo '<h1>Testimoniale</h1>
-    <center><p style="font-size:17px;font-style:italic;">Iata cateva dintre parerile clientilor nostrii:</p></center>';
+{ ?>
+    <h1>Testimoniale</h1>
+    <div class="centerText"><p style="font-size:17px;font-style:italic;">Iata cateva dintre parerile clientilor nostrii:</p></div> <?php
 
     $result = dbQuery("SELECT * FROM testimonials ORDER BY id DESC LIMIT 3");
-    $result->execute();
+    $result->execute(); ?>
 
-    echo '<div class="row">';
+    <div class="row"> <?php
     foreach($result as $row)
     {
         $name = $row['name'];
@@ -97,8 +111,8 @@ function Testimonials()
         echo "$feedback";
         echo '</div>';
         echo '</div>';
-    }
-    echo '</div>';
+    } ?>
+    </div> <?php
 }
 
 function Car_Testimonials($carid)
