@@ -135,7 +135,7 @@ $result2->execute();
                                 {
                                     $location = $row2['location'];
                                     $id = $row2['id']; ?>
-                                    <option value=$id><?=$location?></option>
+                                    <option value=<?=$id?>><?=$location?></option>
                           <?php } ?>
                             </select>
                         </div><br>
