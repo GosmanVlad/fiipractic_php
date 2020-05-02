@@ -7,11 +7,11 @@ $pagid = $_GET['category'];
 if($pagid == 0)
     $category = dbQuery("SELECT cat.id as categoryID, cat.name as categoryName, ct.combustible, ct.transmission, ct.engine_capacity, ct.price, ct.id as car_id, ct.name, ct.image 
                                 FROM cars_category as cat 
-                                JOIN cars as ct ON cat.id=ct.category");
+                                JOIN cars as ct ON cat.id=ct.category ORDER BY ct.id DESC");
 else
     $category = dbQuery("SELECT cat.id as categoryID, cat.name as categoryName, ct.combustible, ct.transmission, ct.engine_capacity, ct.price, ct.id as car_id, ct.name, ct.image 
                                 FROM cars_category as cat 
-                                JOIN cars as ct ON cat.id=ct.category WHERE cat.id='$pagid'");
+                                JOIN cars as ct ON cat.id=ct.category WHERE cat.id='$pagid' ORDER BY ct.id DESC");
 $category->execute();
 ?>
 

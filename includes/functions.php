@@ -1,6 +1,6 @@
 <?php
 session_start();
-define("URL", "http://localhost/rent/");
+define("URL", "http://localhost:8080/rental/");
 require("mysql.php");
 
 function category_Menu($page, $type)
@@ -133,4 +133,12 @@ function Car_Testimonials($carid)
         echo '</div>';
     }
     echo '</div>';
+}
+
+function getCarPrice($carid)
+{
+    $car = dbQuery("SELECT price FROM cars WHERE id='$carid'");
+    $car->execute();
+    $row = $car->fetch();
+    return $row['price'];
 }

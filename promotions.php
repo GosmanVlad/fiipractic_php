@@ -10,14 +10,16 @@ if($pagid == 0)
                             JOIN cars as ct 
                             ON prt.car_id = ct.id 
                             JOIN cars_category as cat 
-                            ON ct.category=cat.id");
+                            ON ct.category=cat.id
+                            ORDER BY prt.id DESC");
 else
     $category = dbQuery("SELECT ct.*, prt.newPrice, prt.oldPrice, prt.until, cat.name as categoryName 
                             FROM promotions as prt 
                             JOIN cars as ct 
                             ON prt.car_id = ct.id 
                             JOIN cars_category as cat 
-                            ON ct.category=cat.id WHERE cat.id='$pagid'");
+                            ON ct.category=cat.id WHERE cat.id='$pagid'
+                            ORDER BY prt.id DESC");
 $category->execute();
 ?>
 
