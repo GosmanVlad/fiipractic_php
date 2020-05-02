@@ -142,3 +142,27 @@ function getCarPrice($carid)
     $row = $car->fetch();
     return $row['price'];
 }
+
+function getCarName($carid)
+{
+    $car = dbQuery("SELECT name FROM cars WHERE id='$carid'");
+    $car->execute();
+    $row = $car->fetch();
+    return $row['name'];
+}
+
+function deleteCar($carid)
+{
+    vQuery("DELETE FROM cars WHERE id='$carid'");
+    vQuery("DELETE FROM promotions WHERE car_id='$carid'");
+    vQuery("DELETE FROM car_feedback WHERE carid='$carid'");
+    vQuery("DELETE FROM appointments WHERE carid='$carid'");
+}
+
+function getCategoryName($categoryID)
+{
+    $category = dbQuery("SELECT name FROM cars_category WHERE id='$categoryID'");
+    $category->execute();
+    $row = $category->fetch();
+    return $row['name'];
+}

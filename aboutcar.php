@@ -47,7 +47,26 @@ $result2->execute();
     <?php Menu() ?>
     <div class="body-container"><div class="body-wall"><br>
         <?php 
-            if(isset($_POST['sendbtn']))
+            if(isset($_POST['deleteConfirm']))
+            {
+                $delete_carid = $_POST['carID'];
+                deleteCar($delete_carid); ?>
+                <div class="alert alert-succes centerText">
+                    <strong>Masina stears!</strong> Masina a fost scoasa de pe site!
+                </div> <?php
+                header( "refresh:1;url=admin_home.php" );
+            }
+            else if(isset($_POST['adminCommand']))
+            {?>
+                <form method="POST" action="">
+                    <input type="hidden" name="carID" value="<?=$carid?>">
+                    <div class="alert alert-warning centerText">
+                        <strong>Esti sigur?</strong> Masina va fi stearsa definitiv din baza de date. Esti sigur de aceasta operatie?
+                        <br><button type="submit" class="btn btn-danger" name="deleteConfirm"><i class="fa fa-remove"></i> DA</button>
+                    </div>
+                </form> <?php
+            }
+            else if(isset($_POST['sendbtn']))
             {
                 if(empty($_POST['nume']) || empty($_POST['telefon']) || empty($_POST['data']) || empty($_POST['data-predare']))
                     header("Location: cars.php");
@@ -77,7 +96,8 @@ $result2->execute();
                         Insa, cererea ta va trebui sa mai treaca printr-un singur pas, si anume, aprobarea agentului! Acesta te va suna in cel mai scurt timp!</div> <?php
                 }
             } ?>
-            <h1><?=$name?></h1><hr>
+            <h1><?=$name?></h1>
+            <hr>
             <div class='row'>
             <div class='col-sm'><img class='car-image' src='<?php echo ''.URL.'images/'.$image.''; ?>'></img></div>
                 <div class='col-sm'>
@@ -151,5 +171,21 @@ $result2->execute();
         <div class="centerText"><h3>Vezi ce spun clientii despre masina</h3></div><br>
             <?php Car_Testimonials($carid); ?>
     </div></div>
+
+    <?php if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1) {?>
+        <div class="body-container"><div class="body-wall">
+            <div class="centerText"><h3>Admin Panel</h3></div><br>
+                <div class="row">
+                    <div class="col-xs">
+                        <form method="POST" action="">
+                            <button type="submit" class="btn btn-danger" name="adminCommand"><i class="fa fa-remove"></i> Sterge masina</button><br>
+                        </form>
+                    </div>
+                    <div class="col-sm">
+                        <a href="admin_editcar.php?carid=<?=$carid?>" class="btn btn-info">Editeaza masina</a>
+                    </div>
+                </div>
+        </div></div>
+    <?php } ?>
     <?php Footer() ?>
 </body>
