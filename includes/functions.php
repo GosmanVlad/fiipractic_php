@@ -57,6 +57,7 @@ function Admin_Sidebar()
     <i class="fa fa-car"></i> <a href="admin_addcar.php">Adauga o masina</a><hr>
     <i class="fa fa-star"></i> <a href="admin_addpromo.php">Adauga o promotie</a><hr>
     <i class="fa fa-users"></i> <a href="admin_users.php">Utilizatori</a><hr>
+    <i class="fa fa-calendar"></i> <a href="admin_appointments.php">Programari</a><hr>
     </div> <?php
 }
 
@@ -155,6 +156,14 @@ function getCarName($carid)
     $car->execute();
     $row = $car->fetch();
     return $row['name'];
+}
+
+function getLocationName($locationid)
+{
+    $location = dbQuery("SELECT location FROM locations WHERE id='$locationid'");
+    $location->execute();
+    $row = $location->fetch();
+    return $row['location'];
 }
 
 function deleteCar($carid)
