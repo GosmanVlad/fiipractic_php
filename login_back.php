@@ -42,6 +42,12 @@ else
                         </div> <?php
                     }
                 }
+                else
+                { ?>
+                        <div class="alert alert-danger" role="alert">
+                        Parola sau username gresit! Mergi inapoi la <a href="<?php ". URL ." ?>login.php">autentificare</a>!
+                        </div> <?php
+                }
         ?>
     </div></div>
 

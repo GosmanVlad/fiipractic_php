@@ -46,7 +46,10 @@ $result2->execute();
 <body>
     <?php Menu() ?>
     <div class="body-container"><div class="body-wall"><br>
-        <?php 
+        <?php
+            /*******************************************************/ 
+            /* BUTTON PRESSED                                      */
+            /*******************************************************/
             if(isset($_POST['deleteConfirm']))
             {
                 $delete_carid = $_POST['carID'];
@@ -56,6 +59,7 @@ $result2->execute();
                 </div> <?php
                 header( "refresh:1;url=admin_home.php" );
             }
+            /********************************************************/
             else if(isset($_POST['adminCommand']))
             {?>
                 <form method="POST" action="">
@@ -66,6 +70,7 @@ $result2->execute();
                     </div>
                 </form> <?php
             }
+            /********************************************************/
             else if(isset($_POST['sendbtn']))
             {
                 if(empty($_POST['nume']) || empty($_POST['telefon']) || empty($_POST['data']) || empty($_POST['data-predare']))
@@ -95,7 +100,10 @@ $result2->execute();
                     ?><div class="alert alert-success">Felicitari! Ai rezervat aceasta masina incepand de la data de <b>'.$data.'</b> pana pe <b>'.$data_predare.'</b><br>
                         Insa, cererea ta va trebui sa mai treaca printr-un singur pas, si anume, aprobarea agentului! Acesta te va suna in cel mai scurt timp!</div> <?php
                 }
-            } ?>
+            } 
+            /********************************************************/
+            /* END - BUTTON PRESSED SCRIPT                          */
+            /********************************************************/?>
             <h1><?=$name?></h1>
             <hr>
             <div class='row'>
@@ -166,12 +174,9 @@ $result2->execute();
                 } ?>
     </div>
     </div>
-
-    <div class="body-container"><div class="body-wall">
-        <div class="centerText"><h3>Vezi ce spun clientii despre masina</h3></div><br>
-            <?php Car_Testimonials($carid); ?>
-    </div></div>
-
+    <!----------------------------------------->
+    <?php Car_Testimonials($carid); ?>
+    <!----------------------------------------->
     <?php if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1) {?>
         <div class="body-container"><div class="body-wall">
             <div class="centerText"><h3>Admin Panel</h3></div><br>
@@ -187,5 +192,6 @@ $result2->execute();
                 </div>
         </div></div>
     <?php } ?>
+    <!----------------------------------------->
     <?php Footer() ?>
 </body>

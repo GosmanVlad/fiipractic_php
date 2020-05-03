@@ -1,6 +1,6 @@
 <?php
 session_start();
-define("URL", "http://localhost:8080/rental/");
+define("URL", "http://localhost/rent/");
 require("mysql.php");
 
 function category_Menu($page, $type)
@@ -120,19 +120,25 @@ function Car_Testimonials($carid)
     $result = dbQuery("SELECT * FROM car_feedback WHERE carid = '$carid' ORDER BY id DESC LIMIT 6");
     $result->execute();
 
-    echo '<div class="row">';
-    foreach($result as $row)
-    {
-        $name = $row['name'];
-        $feedback = $row['feedback'];
-        echo '<div class="col-sm">';
-        echo '<div class="testimonials">';
-        echo "<h3>$name</h3>";
-        echo "$feedback";
-        echo '</div>';
-        echo '</div>';
+    if($result->rowCount())
+    {?>
+        <div class="body-container"><div class="body-wall">
+            <div class="centerText"><h3>Vezi ce spun clientii despre masina</h3></div><br>
+            <div class="row"><?php
+                foreach($result as $row)
+                {
+                    $name = $row['name'];
+                    $feedback = $row['feedback'];?>
+                    <div class="col-sm">
+                        <div class="testimonials">
+                            <h3><?=$name?></h3>
+                            <?=$feedback?>
+                        </div>
+                    </div><?php
+                }?>
+            </div>
+        </div></div><?php
     }
-    echo '</div>';
 }
 
 function getCarPrice($carid)
