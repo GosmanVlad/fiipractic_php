@@ -54,34 +54,34 @@ function Profile_Sidebar()
 function Admin_Sidebar()
 { ?>
     <div class="body-wall-profile-side col-3">
-    <i class="fa fa-car"></i> <a href="admin_addcar.php">Adauga o masina</a><hr>
-    <i class="fa fa-star"></i> <a href="admin_addpromo.php">Adauga o promotie</a><hr>
-    <i class="fa fa-users"></i> <a href="admin_users.php">Utilizatori</a><hr>
-    <i class="fa fa-calendar"></i> <a href="admin_appointments.php">Programari</a><hr>
+    <i class="fa fa-car"></i> <a href="<?php echo ''.URL.'';?>admin/admin_addcar.php">Adauga o masina</a><hr>
+    <i class="fa fa-star"></i> <a href="<?php echo ''.URL.'';?>admin/admin_addpromo.php">Adauga o promotie</a><hr>
+    <i class="fa fa-users"></i> <a href="<?php echo ''.URL.'';?>admin/admin_users.php">Utilizatori</a><hr>
+    <i class="fa fa-calendar"></i> <a href="<?php echo ''.URL.'';?>admin/admin_appointments.php">Programari</a><hr>
     </div> <?php
 }
 
 function Menu()
 { ?>
-    <div class="centerText"><img src="images/logo.png" style="width:350; height:150;"></img></div>
+    <div class="centerText"><img src="<?php echo ''.URL.'';?>images/logo.png" style="width:350; height:150;"></img></div>
     <div class='menu-container'><ul class='menu'>
-    <li class='menu-item'><a href='index.php'>Acasa</a></li>
-    <li class='menu-item'><a href='about.php'>Despre noi</a></li>
-    <li class='menu-item'><a href='cars.php'>Masini</a></li>
-    <li class='menu-item'><a href='promotions.php'>Promotii</a></li> <?php
+    <li class='menu-item'><a href='<?php echo ''.URL.'';?>index.php'>Acasa</a></li>
+    <li class='menu-item'><a href='<?php echo ''.URL.'';?>about.php'>Despre noi</a></li>
+    <li class='menu-item'><a href='<?php echo ''.URL.'';?>cars.php'>Masini</a></li>
+    <li class='menu-item'><a href='<?php echo ''.URL.'';?>promotions.php'>Promotii</a></li> <?php
 
     $name = isset($_SESSION['name']) ? $_SESSION['name'] : null;
     $isAdmin = isset($_SESSION['admin']) ? $_SESSION['admin'] : null;
     if($isAdmin) 
-        $AdminCP = " / <a href='admin_home.php'><i class='fa fa-briefcase' style='color:white'></i> Admin Panel</a>";
+        $AdminCP = " / <a href='".URL."admin'><i class='fa fa-briefcase' style='color:white'></i> Admin Panel</a>";
     else
         $AdminCP = '';
     if($name)
     { 
-        echo "<div style='float:right;><i class='fa fa-user' style='color:white'></i> <li class='menu-item'><a href='profile.php'><i class='fa fa-user' style='color:white'></i> Salut, $name!</a>$AdminCP / <i class='fa fa-times' style='color:white;'></i><a href='logout.php'>Log Out</a></li>";
+        echo "<div style='float:right;><i class='fa fa-user' style='color:white'></i> <li class='menu-item'><a href='".URL."profile.php'><i class='fa fa-user' style='color:white'></i> Salut, $name!</a>$AdminCP / <i class='fa fa-times' style='color:white;'></i><a href='".URL."logout.php'>Log Out</a></li>";
     }
     else
-        echo "<div style='float:right;'><li class='menu-item'><a href='register.php'><i class='fa fa-user-plus' style='color:white'></i> Inregistrare</a> / <a href='login.php'> <i class='fa fa-address-card' style='color:white'></i> Autentificare</a></li></div>";
+        echo "<div style='float:right;'><li class='menu-item'><a href='".URL."register.php'><i class='fa fa-user-plus' style='color:white'></i> Inregistrare</a> / <a href='".URL."login.php'> <i class='fa fa-address-card' style='color:white'></i> Autentificare</a></li></div>";
     ?> </ul></div> <?php
 }
 

@@ -1,4 +1,4 @@
-<?php include('header.php');
+<?php include('../header.php');
 if(!isset($_SESSION['name']) || $_SESSION['admin'] == 0)
     header("Location: ../index.php");
 else
