@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Gazdă: 127.0.0.1
--- Timp de generare: apr. 02, 2020 la 10:15 PM
+-- Timp de generare: mai 04, 2020 la 05:59 PM
 -- Versiune server: 10.4.11-MariaDB
--- Versiune PHP: 7.2.27
+-- Versiune PHP: 7.4.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -45,12 +44,10 @@ CREATE TABLE `appointments` (
 --
 
 INSERT INTO `appointments` (`id`, `name`, `carid`, `data`, `data_predare`, `location`, `additions`, `phone`, `approved`) VALUES
-(7, 'Vlad', 2, '29/03/2020', '31/03/2020', 1, '', 23131221, 0),
-(8, 'Vlad', 2, '1/04/2020', '2/04/2020', 1, '', 0, 0),
-(9, 'Vlad', 2, '1/04/2020', '2/04/2020', 1, '', 0, 0),
-(10, 'Vlad', 2, '2/04/2020', '3/04/2020', 1, '', 0, 0),
 (11, 'Vlad', 1, '2/04/2020', '7/04/2020', 1, '', 321321, 0),
-(13, 'Vlad', 1, '28/03/2020', '29/03/2020', 1, '', 0, 0);
+(13, 'Vlad', 1, '28/03/2020', '29/03/2020', 1, '', 0, 0),
+(14, 'Vlad', 1, '8/04/2020', '20/04/2020', 1, 'test', 0, 1),
+(15, 'Vlad', 1, '6/05/2020', '26/05/2020', 1, 'Test', 123231, 0);
 
 -- --------------------------------------------------------
 
@@ -79,7 +76,8 @@ CREATE TABLE `cars` (
 
 INSERT INTO `cars` (`id`, `name`, `category`, `combustible`, `seats`, `consumption`, `engine_capacity`, `facilities`, `image`, `transmission`, `price`, `power`) VALUES
 (1, 'Renault Zoe', 1, 'Electric', 5, 6, 1200, 'Geamuri electrice<br>\r\nIncalzire in scaune<br>\r\nIncalzire volan<br>\r\nScaun bebelus<br>', 'zoe.jpg', 'Manuala', 30, 95),
-(2, 'Dacia Logan', 2, 'Benzina', 5, 4, 1200, '', 'logan.png', 'Manuala', 12, 95);
+(2, 'Dacia Logan', 2, 'Benzina', 5, 4, 1200, '', 'logan.png', 'Manuala', 12, 95),
+(3, 'Opel Astra G', 2, 'Benzina', 5, 7, 1400, 'Test1<br>\r\nTest2<br>\r\nTest3', 'astra_g.jpg', 'Manuala', 20, 93);
 
 -- --------------------------------------------------------
 
@@ -103,6 +101,31 @@ INSERT INTO `cars_category` (`id`, `name`) VALUES
 (4, 'Hatchback'),
 (5, 'Pickup'),
 (6, 'Break');
+
+-- --------------------------------------------------------
+
+--
+-- Structură tabel pentru tabel `car_feedback`
+--
+
+CREATE TABLE `car_feedback` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `carid` int(11) NOT NULL,
+  `feedback` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Eliminarea datelor din tabel `car_feedback`
+--
+
+INSERT INTO `car_feedback` (`id`, `name`, `email`, `carid`, `feedback`) VALUES
+(4, 'Vlad', 'test@yahoo.com', 0, 'test'),
+(5, 'Vlad', 'test@yahoo.com', 2, 'test'),
+(6, 'Vlad', 'test@yahoo.com', 1, 'test'),
+(7, 'Vlad', 'test@yahoo.com', 1, 'sal'),
+(8, 'Vlad', 'test@yahoo.com', 1, 'test');
 
 -- --------------------------------------------------------
 
@@ -143,7 +166,7 @@ CREATE TABLE `promotions` (
 --
 
 INSERT INTO `promotions` (`id`, `car_id`, `oldPrice`, `newPrice`, `until`) VALUES
-(1, 1, 40, 30, '4/04/20214');
+(1, 1, 40, 30, '4/04/2021');
 
 -- --------------------------------------------------------
 
@@ -190,7 +213,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `password`, `email`, `admin`, `premium`, `employee`) VALUES
-(6, 'Vlad', 'c8837b23ff8aaa8a2dde915473ce0991', 'test@yahoo.com', 0, 0, 0);
+(6, 'Vlad', 'c8837b23ff8aaa8a2dde915473ce0991', 'test@yahoo.com', 1, 0, 0);
 
 --
 -- Indexuri pentru tabele eliminate
@@ -212,6 +235,12 @@ ALTER TABLE `cars`
 -- Indexuri pentru tabele `cars_category`
 --
 ALTER TABLE `cars_category`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexuri pentru tabele `car_feedback`
+--
+ALTER TABLE `car_feedback`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -246,19 +275,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pentru tabele `appointments`
 --
 ALTER TABLE `appointments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT pentru tabele `cars`
 --
 ALTER TABLE `cars`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pentru tabele `cars_category`
 --
 ALTER TABLE `cars_category`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT pentru tabele `car_feedback`
+--
+ALTER TABLE `car_feedback`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT pentru tabele `locations`
