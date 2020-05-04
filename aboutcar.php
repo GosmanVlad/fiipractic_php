@@ -91,13 +91,13 @@ $result2->execute();
                             ($data_predare_hash >= $data_primire_hash && $data_predare_hash <= $data_pred_hash) ||
                             $data_hash >= $data_primire_hash && $data_predare_hash <= $data_pred_hash ||
                             $data_hash >= $data_primire_hash && $data_hash <= $data_pred_hash) { ?>
-                            <div class='alert alert-danger'>Acest vehicul este deja rezervat in intervalul <b>$data_primire</b> - <b>$data_pred</b>!<br>
+                            <div class='alert alert-danger'>Acest vehicul este deja rezervat in intervalul <b><?=$data_primire?></b> - <b><?=$data_pred?></b>!<br>
                             <a href="" onclick="goBack()">Mergi inapoi.</a></div> <?php
                             exit();
                         }
                     }
                     vQuery("INSERT INTO appointments (name, carid, data, data_predare, location, additions, phone) VALUES ('$nume', '$car', '$data', '$data_predare', '$location', '$additions', '$phone')");
-                    ?><div class="alert alert-success">Felicitari! Ai rezervat aceasta masina incepand de la data de <b>'.$data.'</b> pana pe <b>'.$data_predare.'</b><br>
+                    ?><div class="alert alert-success">Felicitari! Ai rezervat aceasta masina incepand de la data de <b><?=$data?></b> pana pe <b><?=$data_predare?></b><br>
                         Insa, cererea ta va trebui sa mai treaca printr-un singur pas, si anume, aprobarea agentului! Acesta te va suna in cel mai scurt timp!</div> <?php
                 }
             } 
@@ -187,7 +187,7 @@ $result2->execute();
                         </form>
                     </div>
                     <div class="col-sm">
-                        <a href="admin_editcar.php?carid=<?=$carid?>" class="btn btn-info">Editeaza masina</a>
+                        <a href="<?php echo ''.URL.''?>admin/admin_editcar.php?carid=<?=$carid?>" class="btn btn-info">Editeaza masina</a>
                     </div>
                 </div>
         </div></div>
