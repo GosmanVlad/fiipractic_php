@@ -28,13 +28,23 @@ else
             $carNewPrice = $_POST['carNewPrice'];
             $carOldPrice = getCarPrice($carID);
 
-            $result = vQuery("INSERT INTO promotions (id, car_id, oldPrice, newPrice, until) 
+            if(isPromo($carID))
+            {
+                $result = vQuery("INSERT INTO promotions (id, car_id, oldPrice, newPrice, until) 
                             VALUES (NULL, '$carID', '$carOldPrice', '$carNewPrice', '$carExpiration')");
                     
-            echo '<div class="alert alert-success" role="alert">
-                    Promotia a fost adaugata cu succes!
-                </div>';
-            header( "refresh:1;url=../promotions.php" );
+                echo '<div class="alert alert-success" role="alert">
+                        Promotia a fost adaugata cu succes!
+                    </div>';
+                header( "refresh:1;url=../promotions.php" );
+            }
+            else
+            {
+                echo '<div class="alert alert-danger" role="alert">
+                        Masina este deja la promotie!
+                    </div>';
+                header( "refresh:1;url=../promotions.php" );
+            }
         }
         ?>
         <div class="row">

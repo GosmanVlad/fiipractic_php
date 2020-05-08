@@ -192,3 +192,14 @@ function getCategoryName($categoryID)
     $row = $category->fetch();
     return $row['name'];
 }
+
+function isPromo($carid)
+{
+    $isPromo = dbQuery("SELECT id FROM promotions WHERE car_id='$carid'");
+    $isPromo->execute();
+
+    if($isPromo->rowCount())
+        return false;
+    else
+        return true;
+}
