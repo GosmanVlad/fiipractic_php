@@ -142,6 +142,17 @@ function Car_Testimonials($carid)
     }
 }
 
+function getNewPrice($carid)
+{
+    $car = dbQuery("SELECT oldPrice, newPrice, until FROM promotions WHERE car_id='$carid'");
+    $car->execute();
+    
+    if($car->rowCount())
+        return $car->fetch();
+    else
+        return NULL;
+}
+
 function getCarPrice($carid)
 {
     $car = dbQuery("SELECT price FROM cars WHERE id='$carid'");

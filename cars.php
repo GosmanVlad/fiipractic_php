@@ -27,8 +27,15 @@ $category->execute();
                 $combustible = $row2['combustible'];
                 $transmission = $row2['transmission'];
                 $capacity = $row2['engine_capacity'];
+                $car_id = $row2['car_id']; 
                 $price = $row2['price'];
-                $car_id = $row2['car_id']; ?>
+                
+                $promotions = getNewPrice($car_id);
+                if($promotions != NULL)
+                    $checkPrice = "<b style='color:red'><strike>$price <i class='fa fa-euro'></i> / day</strike></b><br><b style='color:green'>".$promotions['newPrice']." <i class='fa fa-euro'></i> / day</b><br>";
+                else
+                    $checkPrice = "<b style='color:green'>$price <i class='fa fa-euro'></i> / day</b>";
+                ?>
 
                 <div class='box-container'>
                 <img class='box-image' src ='<?php echo ''.URL.'images/'.$row2["image"].''; ?>'></img><hr>
@@ -36,7 +43,7 @@ $category->execute();
                 <p style='font-size:13px;'><i class='fa fa-check'></i><?= $transmission ?><br>
                 <i class='fa fa-check'></i><?= $combustible ?><br>
                 <i class='fa fa-check'></i> <b>Capacitate motor:</b><?= $capacity ?><p>
-                <div class='centerText'><b style='color:green'><?= $price ?> <i class='fa fa-euro'></i> / day</b></div>
+                <div class='centerText'><?=$checkPrice?></div>
                 <p><div class='centerText'><a href='<?php echo ''.URL.'aboutcar.php?carid='.$car_id.''; ?>' class='btn btn-primary'>Afla mai multe detalii</a></div></p></div> <?php
             }?>
     </div></div>
