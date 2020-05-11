@@ -57,7 +57,7 @@ $result2->execute();
                 <div class="alert alert-succes centerText">
                     <strong>Masina stears!</strong> Masina a fost scoasa de pe site!
                 </div> <?php
-                header( "refresh:1;url=admin_home.php" );
+                header( "refresh:1;url=".URL."admin_home.php" );
             }
             /********************************************************/
             else if(isset($_POST['adminCommand']))
