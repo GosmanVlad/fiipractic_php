@@ -8,11 +8,11 @@ Car Rental Website - Basic functionalities - developed with PHP, HTML, Bootstrap
 - Bootstrap framework
 
 # Systems
-[x] System register & login
-[x] Profile
-[x] Feedback system (only if you rented a car)
-[x] Reservation system
-[x] Admin Control Panel (manage cars - delete, add, edit).
-[x] Manage account (change password)
-[x] Promotion system (the cars are highlighted)
+- [x] System register & login
+- [x] Profile
+- [x] Feedback system (only if you rented a car)
+- [x] Reservation system
+- [x] Admin Control Panel (manage cars - delete, add, edit).
+- [x] Manage account (change password)
+- [x] Promotion system (the cars are highlighted)
 
